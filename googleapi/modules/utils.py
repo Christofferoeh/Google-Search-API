@@ -40,7 +40,7 @@ def normalize_query(query):
     return query.strip().replace(":", "%3A").replace("+", "%2B").replace("&", "%26").replace(" ", "+")
 
 
-def _get_search_url(query, page=0, per_page=10, lang='en', area='com', ncr=False, time_period=False, sort_by_date=False):
+def _get_search_url(query, page=0, per_page=10, lang='en', area='dk', ncr=False, time_period=False, sort_by_date=False):
     # note: num per page might not be supported by google anymore (because of
     # google instant)
 

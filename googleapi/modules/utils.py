@@ -40,7 +40,7 @@ def normalize_query(query):
     return query.strip().replace(":", "%3A").replace("+", "%2B").replace("&", "%26").replace(" ", "+")
 
 
-def _get_search_url(query, page=0, per_page=10, lang='en', area='dk', ncr=False, time_period=False, sort_by_date=False):
+def _get_search_url(query, page=0, per_page=10, lang='en', area='dk', ncr=True, time_period=False, sort_by_date=False):
     # note: num per page might not be supported by google anymore (because of
     # google instant)
 
@@ -70,13 +70,13 @@ def _get_search_url(query, page=0, per_page=10, lang='en', area='dk', ncr=False,
 
     # This will allow to search Google with No Country Redirect
     if ncr:
-        params['gl'] = 'us' # Geographic Location: US
+        params['gl'] = 'dk' # Geographic Location: US
         params['pws'] = '0' # 'pws' = '0' disables personalised search
         params['gws_rd'] = 'cr' # Google Web Server ReDirect: CountRy.
 
     params = urlencode(params)
 
-    url = u"https://www.google.com/search?" + params
+    url = u"https://www.google.dk/search?" + params
 
     # @author JuaniFilardo:
     # Workaround to switch between http and https, since this maneuver
@@ -86,7 +86,7 @@ def _get_search_url(query, page=0, per_page=10, lang='en', area='dk', ncr=False,
     # between each query, and randint(180,240) every 100 queries, which is
     # what I found useful.
     https = int(time.time()) % 2 == 0
-    bare_url = u"https://www.google.com/search?" if https else u"http://www.google.com/search?"
+    bare_url = u"https://www.google.dk/search?" if https else u"http://www.google.com/search?"
     url = bare_url + params
 
     # return u"http://www.google.com/search?hl=%s&q=%s&start=%i&num=%i" %
@@ -97,7 +97,7 @@ def _get_search_url(query, page=0, per_page=10, lang='en', area='dk', ncr=False,
         elif area == 'is':
             url = 'http://www.google.is/search?'
         elif area == 'dk':
-            url = 'http://www.google.dk/search?'
+            url = u"http://www.google.dk/search?"
         elif area == 'no':
             url = 'http://www.google.no/search?'
         elif area == 'se':

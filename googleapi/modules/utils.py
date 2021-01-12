@@ -40,7 +40,7 @@ def normalize_query(query):
     return query.strip().replace(":", "%3A").replace("+", "%2B").replace("&", "%26").replace(" ", "+")
 
 
-def _get_search_url(query, page=0, per_page=10, lang='en', area='dk', ncr=True, time_period=False, sort_by_date=False):
+def _get_search_url(query, page=0, per_page=10, lang='da', area='dk', ncr=True, time_period=False, sort_by_date=False):
     # note: num per page might not be supported by google anymore (because of
     # google instant)
 
@@ -86,7 +86,7 @@ def _get_search_url(query, page=0, per_page=10, lang='en', area='dk', ncr=True, 
     # between each query, and randint(180,240) every 100 queries, which is
     # what I found useful.
     https = int(time.time()) % 2 == 0
-    bare_url = u"https://www.google.dk/search?" if https else u"http://www.google.com/search?"
+    bare_url = u"https://www.google.dk/search?" if https else u"http://www.google.dk/search?"
     url = bare_url + params
 
     # return u"http://www.google.com/search?hl=%s&q=%s&start=%i&num=%i" %
